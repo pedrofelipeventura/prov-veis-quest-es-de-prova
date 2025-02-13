@@ -1,0 +1,52 @@
+//1. Array de structs com malloc e argumentos do argv
+//Escreva um programa em C que:
+//a) Leia do argumento da linha de comando (argv) a quantidade de produtos que será armazenada.
+//b) Aloca dinamicamente memória para um array de structs chamado Produto. Cada struct deve conter:
+
+//Um nome (até 50 caracteres).
+//O preço (ponto flutuante).
+//c) Peça ao usuário para preencher os dados de cada produto.
+//d) Exiba os produtos armazenados.
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct produtos{
+  char nome[50];
+  float preco;
+};
+
+int main(int argc, char *argv[]){
+
+if(argc != 2){
+  printf("Uso: %s <quantidade de produtos>\n", argv[0]);
+  return 1;
+}
+
+int n = atoi(argv[1]);
+  if(n <= 0){
+    printf("Quantidade de produtos deve ser maior que zero. \n");
+    return 1;
+  }
+
+  struct produtos *produtos = (struct produtos*) malloc(sizeof(struct produtos) * n);
+  if(produtos == NULL){
+    printf("Erro ao alocar memória. \n");
+    return 1;
+  }
+
+for(int i =0; i<n; i++){
+  printf("Digite o nome do produto %d: ", i+1);
+  fgets(produtos[i].nome, sizeof(produtos[i].nome), stdin);
+  printf("Digite o preço do produto %d: ", i+1);
+  scanf("%f", &produtos[i].preco);
+  getchar();
+}
+
+  printf("\nProdutos armazenados:\n");
+  for(int i = 0; i<n; i++){
+    printf("Produto %d, Nome: %s, Preço: %.2f\n", i+1, produtos[i].nome, produtos[i].preco);
+  }
+  free(produtos);
+return 0;
+}
