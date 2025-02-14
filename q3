@@ -1,0 +1,17 @@
+//função callback 
+
+#include <stdio.h>
+
+void minha_funcao_callback(void (*callback)()) {
+    printf("Executando a função callback:\n");
+    callback();  // Chama a função passada como argumento
+}
+
+void saudacao() {
+    printf("Olá, sou a função de callback!\n");
+}
+
+int main() {
+    minha_funcao_callback(saudacao);  // Passa a função "saudacao" como argumento
+    return 0;
+}
