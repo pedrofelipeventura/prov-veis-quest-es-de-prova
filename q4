@@ -1,0 +1,39 @@
+//Implemente um programa que utilize uma lista encadeada simples com a seguinte estrutura:
+//struct Node {
+  //  int valor;
+ //   struct Node* proximo;
+//};
+#include <stdio.h>
+#include <stdlib.h>
+
+struct no{
+  int valor;
+  struct no *proximo;
+};
+
+void imprimir_proximo_no(struct no *no){
+    if(no != NULL && no->proximo != NULL){
+        printf("Valor do próximo nó %d\n", no->proximo->valor);
+    }else {
+        printf("Não há próximo nó\n");
+    }
+}
+int main (){
+
+struct no um;
+struct no dois;
+struct no tres;
+    um.valor = 20;
+    um.proximo = &dois;
+
+    dois.valor = 30;
+    dois.proximo = &tres;
+
+    tres.valor = 40;
+    tres.proximo = NULL;
+
+    imprimir_proximo_no(&um);
+    imprimir_proximo_no(&dois);
+    imprimir_proximo_no(&tres);
+return 0;    
+}
